@@ -115,4 +115,16 @@ return [
         ],
     ],
 
+    'default' => env('LOG_CHANNEL', 'daily'),
+
+    'channels' => [
+        'daily' => [
+            'driver' => 'daily',
+            // 'tap' => [CR\Laravel\LogHandler\LogFormatter::class],
+            'path' => storage_path('logs/' . php_sapi_name() . '-laravel.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            // 'days' => 14,
+        ],
+    ],
+
 ];
