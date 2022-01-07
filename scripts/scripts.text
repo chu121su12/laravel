@@ -3,7 +3,7 @@ git repack -a -d --depth=50 --window=50
 git repack -a -d --depth=5 --window=5
 
 // base
-rsync -e 'ssh -p22' -ahzP --exclude='.git' --filter=":- .gitignore" --exclude='node_modules' --exclude='storage' ~/./ root@0:/home/./
+rsync -e 'ssh -p22' -ahzP --exclude='.git' --exclude='node_modules' ~/./ root@0:/home/./
 // root
 rsync -e 'ssh -p22' -ahzP --exclude='.git' --filter=":- .gitignore" --exclude='node_modules' --exclude='storage' --exclude='vendor' ~/./ root@0:/home/./
 // app
