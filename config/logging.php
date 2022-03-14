@@ -127,7 +127,7 @@ return [
 
         'daily' => [
             'driver' => 'daily',
-            // 'tap' => [CR\Laravel\LogHandler\LogFormatter::class],
+            'tap' => [CR\Library\Laravel\LogHandler\LogFormatter::class],
             'path' => storage_path('logs/' . php_sapi_name() . '-laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             // 'days' => 14,
