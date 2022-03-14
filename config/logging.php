@@ -119,6 +119,12 @@ return [
     'default' => env('LOG_CHANNEL', 'daily'),
 
     'channels' => [
+        'stack' => [
+            'driver' => 'stack',
+            'channels' => ['daily'],
+            'ignore_exceptions' => false,
+        ],
+
         'daily' => [
             'driver' => 'daily',
             // 'tap' => [CR\Laravel\LogHandler\LogFormatter::class],
