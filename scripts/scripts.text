@@ -3,24 +3,24 @@ git repack -a -d --depth=50 --window=50
 git repack -a -d --depth=5 --window=5
 
 // base
-rsync -e 'ssh -p22' -ahzP --exclude='.git' --exclude='node_modules' ~/./ root@0:/home/./
-rsync -e 'ssh -p22' -ahzP --filter=":- .gitignore" --exclude='.git' --exclude='node_modules' ~/./ root@0:/home/./
+rsync -e 'ssh -p22' -ahzP --exclude='.git' --exclude='.env' --exclude='node_modules' ~/./ root@0:/home/./
+rsync -e 'ssh -p22' -ahzP --exclude='.git' --exclude='.env' --filter=":- .gitignore" --exclude='node_modules' ~/./ root@0:/home/./
 chmod -R 777 /home/./bootstrap/ /home/./storage/
 ln -s /home/./public/ /www/
 
 // root
-rsync -e 'ssh -p22' -ahzP --filter=":- .gitignore" --exclude='.git' --exclude='node_modules' --exclude='storage' --exclude='vendor' ~/./ root@0:/home/./
+rsync -e 'ssh -p22' -ahzP --exclude='.git' --exclude='.env' --filter=":- .gitignore" --exclude='node_modules' --exclude='storage' --exclude='vendor' ~/./ root@0:/home/./
 // app
-rsync -e 'ssh -p22' -ahzP --filter=":- .gitignore" --exclude='.git' --delete ~/./app/ root@0:/home/./app/
+rsync -e 'ssh -p22' -ahzP --exclude='.git' --filter=":- .gitignore" --delete ~/./app/ root@0:/home/./app/
 // vendors
 rsync -e 'ssh -p22' -ahzP --exclude='.git' --delete ~/./public/ root@0:/home/./public/
 rsync -e 'ssh -p22' -ahzP --exclude='.git' --delete ~/./vendor/ root@0:/home/./vendor/
 rsync -e 'ssh -p22' -ahzP --exclude='.git' --delete ~/./node_modules/ root@0:/home/./node_modules/
 
 // reverse root
-rsync -e 'ssh -p22' -ahzP --filter=":- .gitignore" --exclude='.git' --exclude='node_modules' --exclude='storage' --exclude='vendor' --exclude='*.tar.xz' root@0:/home/./ ~/./
+rsync -e 'ssh -p22' -ahzP --exclude='.git' --exclude='.env' --filter=":- .gitignore" --exclude='node_modules' --exclude='storage' --exclude='vendor' --exclude='*.tar.xz' root@0:/home/./ ~/./
 // reverse app
-rsync -e 'ssh -p22' -ahzP --filter=":- .gitignore" --exclude='.git' root@0:/home/./app/ ~/./app/
+rsync -e 'ssh -p22' -ahzP --exclude='.git' --filter=":- .gitignore" root@0:/home/./app/ ~/./app/
 // reverse vendors
 rsync -e 'ssh -p22' -ahzP --exclude='.git' root@0:/home/./public/ ~/./public/
 rsync -e 'ssh -p22' -ahzP --exclude='.git' root@0:/home/./vendor/ ~/./vendor/
