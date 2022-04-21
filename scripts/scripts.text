@@ -11,17 +11,17 @@ ln -s /home/./public/ /www/
 // root
 rsync -e 'ssh -p22' -ahzP --exclude='.git' --exclude='.env' --filter=":- .gitignore" --exclude='node_modules' --exclude='storage' --exclude='vendor' ~/./ root@0:/home/./
 // app
-rsync -e 'ssh -p22' -ahzP --exclude='.git' --filter=":- .gitignore" --delete ~/./app/ root@0:/home/./app/
+rsync -e 'ssh -p22' -ahzPk --exclude='.git' --filter=":- .gitignore" --delete ~/./app/ root@0:/home/./app/
 // vendors
 rsync -e 'ssh -p22' -ahzP --exclude='.git' --delete ~/./public/ root@0:/home/./public/
-rsync -e 'ssh -p22' -ahzP --exclude='.git' --delete ~/./vendor/ root@0:/home/./vendor/
+rsync -e 'ssh -p22' -ahzPk --exclude='.git' --delete ~/./vendor/ root@0:/home/./vendor/
 rsync -e 'ssh -p22' -ahzP --exclude='.git' --delete ~/./node_modules/ root@0:/home/./node_modules/
 
 // reverse root
-rsync -e 'ssh -p22' -ahzP --exclude='.git' --exclude='.env' --filter=":- .gitignore" --exclude='node_modules' --exclude='storage' --exclude='vendor' --exclude='*.tar.xz' root@0:/home/./ ~/./
+rsync -e 'ssh -p22' -ahzPk --exclude='.git' --exclude='.env' --filter=":- .gitignore" --exclude='node_modules' --exclude='storage' --exclude='vendor' --exclude='*.tar.xz' root@0:/home/./ ~/./
 // reverse app
-rsync -e 'ssh -p22' -ahzP --exclude='.git' --filter=":- .gitignore" root@0:/home/./app/ ~/./app/
+rsync -e 'ssh -p22' -ahzPk --exclude='.git' --filter=":- .gitignore" root@0:/home/./app/ ~/./app/
 // reverse vendors
-rsync -e 'ssh -p22' -ahzP --exclude='.git' root@0:/home/./public/ ~/./public/
-rsync -e 'ssh -p22' -ahzP --exclude='.git' root@0:/home/./vendor/ ~/./vendor/
-rsync -e 'ssh -p22' -ahzP --exclude='.git' root@0:/home/./node_modules/ ~/./node_modules/
+rsync -e 'ssh -p22' -ahzPk --exclude='.git' root@0:/home/./public/ ~/./public/
+rsync -e 'ssh -p22' -ahzPk --exclude='.git' root@0:/home/./vendor/ ~/./vendor/
+rsync -e 'ssh -p22' -ahzPk --exclude='.git' root@0:/home/./node_modules/ ~/./node_modules/
