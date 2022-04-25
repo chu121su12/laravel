@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Facade;
 
 return [
 
+    'app-administration' => [
+        'passwords' => json_decode(env('APP_ADMINISTRATION_PASSWORDS', '[]'), true),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
