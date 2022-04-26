@@ -2,11 +2,23 @@
 
 namespace App\Console;
 
+use Closure;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+    public function command($signature, $callback = null)
+    {
+        if ($callback instanceof Closure) {
+            return parent::command($signature, $callback);
+        }
+
+        if (\class_exists($signature)) {
+            $this->commands[] = $signature;
+        }
+    }
+
     /**
      * Define the application's command schedule.
      *
