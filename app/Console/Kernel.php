@@ -8,7 +8,7 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    public function command($signature, $callback = null)
+    public function command($signature, Closure $callback = null)
     {
         if ($callback instanceof Closure) {
             return parent::command($signature, $callback);

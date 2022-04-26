@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Sanctum\Sanctum;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +16,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+
+        // Sanctum::ignoreMigrations();
     }
 
     /**
@@ -26,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
     {
         //
 
-        Schema::defaultStringLength(191);
+        // Sanctum::usePersonalAccessTokenModel(\Laravel\Sanctum\PersonalAccessToken::class);
+
+        // Schema::defaultStringLength(191);
     }
 }
