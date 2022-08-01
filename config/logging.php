@@ -128,6 +128,19 @@ return [
             'ignore_exceptions' => false,
         ],
 
+        'debug' => [
+            'driver' => 'stack',
+            'channels' => ['daily', '_debug_split'],
+            'ignore_exceptions' => false,
+        ],
+
+        '_debug_split' => [
+            'driver' => 'single',
+            'tap' => [CR\Library\Laravel\LogHandler\LogFormatter::class],
+            'path' => storage_path('logs/' . php_sapi_name() . '-laravel.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+
         'daily' => [
             'driver' => 'daily',
             'tap' => [CR\Library\Laravel\LogHandler\LogFormatter::class],
