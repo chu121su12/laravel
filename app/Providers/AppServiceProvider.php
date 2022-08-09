@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Date::use(CarbonImmutable::class);
+        Date::use_(CarbonImmutable::class);
 
         //
 
