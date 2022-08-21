@@ -1,3 +1,9 @@
+
+c:\x\app\php\php-7x\php php-cs-fixer-v3.phar fix --allow-risky=yes
+c:\x\app\php\php-7x\php phpstan.phar analyze --memory-limit 1G
+
+wget https://github.com/phpstan/phpstan/releases/download/<ver>/phpstan.phar
+
 git repack -a -d --depth=250 --window=250
 git repack -a -d --depth=50 --window=50
 git repack -a -d --depth=5 --window=5
@@ -14,6 +20,8 @@ rsync -e 'ssh -p22' -ahzP --exclude='.git' --exclude='.env' --filter=":- .gitign
 rsync -e 'ssh -p22' -ahzPk --exclude='.git' --filter=":- .gitignore" --delete ~/./app/ root@0:/home/./app/
 // vendors
 rsync -e 'ssh -p22' -ahzP --exclude='.git' --delete ~/./public/ root@0:/home/./public/
+rsync -e 'ssh -p22' -ahzP --exclude='.git' --delete ~/./config/ root@0:/home/./config/
+rsync -e 'ssh -p22' -ahzP --exclude='.git' --delete ~/./routes/ root@0:/home/./routes/
 rsync -e 'ssh -p22' -ahzPk --exclude='.git' --delete ~/./vendor/ root@0:/home/./vendor/
 rsync -e 'ssh -p22' -ahzP --exclude='.git' --delete ~/./node_modules/ root@0:/home/./node_modules/
 
@@ -23,5 +31,7 @@ rsync -e 'ssh -p22' -ahzPk --exclude='.git' --exclude='.env' --filter=":- .gitig
 rsync -e 'ssh -p22' -ahzPk --exclude='.git' --filter=":- .gitignore" root@0:/home/./app/ ~/./app/
 // reverse vendors
 rsync -e 'ssh -p22' -ahzPk --exclude='.git' root@0:/home/./public/ ~/./public/
+rsync -e 'ssh -p22' -ahzPk --exclude='.git' root@0:/home/./config/ ~/./config/
+rsync -e 'ssh -p22' -ahzPk --exclude='.git' root@0:/home/./routes/ ~/./routes/
 rsync -e 'ssh -p22' -ahzPk --exclude='.git' root@0:/home/./vendor/ ~/./vendor/
 rsync -e 'ssh -p22' -ahzPk --exclude='.git' root@0:/home/./node_modules/ ~/./node_modules/

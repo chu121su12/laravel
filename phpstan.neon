@@ -6,3 +6,10 @@ parameters:
 
     bootstrapFiles:
         - phpstan-bootstrap.php
+
+    # polluteScopeWithLoopInitialAssignments: false
+    # polluteScopeWithAlwaysIterableForeach: false
+    # checkFunctionNameCase: true
+    # checkInternalClassCaseSensitivity: true
+    # checkUninitializedProperties: true
+    # checkDynamicProperties: true

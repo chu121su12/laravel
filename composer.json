@@ -38,6 +38,7 @@
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php php-cs-fixer-v3.phar selfupdate",
             "@php composer.phar selfupdate"
         ],
         "post-root-package-install": [
