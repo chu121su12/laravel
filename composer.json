@@ -39,7 +39,7 @@
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
             "@php php-cs-fixer-v3.phar selfupdate",
-            "@php composer.phar selfupdate"
+            "@php composer.phar selfupdate --2.2"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
