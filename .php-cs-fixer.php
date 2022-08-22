@@ -5,7 +5,7 @@ $sortRisky = false;
 $yoda = false;
 
 // app
-$finalClass = true;
+$finalClass = false;
 $ifToBoolReturn = true;
 $keepUnusedImport = true;
 $moreRisky = true;
@@ -13,14 +13,14 @@ $regularRisky = true;
 $sortOther = true;
 $superRisky = true;
 
-// lib
-$finalClass = false;
-$ifToBoolReturn = true;
-$keepUnusedImport = false;
-$moreRisky = true;
-$regularRisky = true;
-$sortOther = true;
-$superRisky = false;
+// // lib
+// $finalClass = false;
+// $ifToBoolReturn = true;
+// $keepUnusedImport = false;
+// $moreRisky = true;
+// $regularRisky = true;
+// $sortOther = true;
+// $superRisky = false;
 
 //
 $rules = [
@@ -531,4 +531,4 @@ $rules = [
 
 return (new PhpCsFixer\Config)
     ->setRules($rules)
-    ->setFinder(PhpCsFixer\Finder::create()->in(__DIR__.'/src/'));
+    ->setFinder(PhpCsFixer\Finder::create()->in(__DIR__.'/app/'));
