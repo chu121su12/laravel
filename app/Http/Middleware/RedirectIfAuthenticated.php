@@ -14,9 +14,13 @@ class RedirectIfAuthenticated
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  string|null  ...$guards
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, string ...$guards): Response
+    public function handle(Request $request, Closure $next, /*string */...$guards)/*: Response*/
     {
+        $guards = backport_array_type_check('string', $guards);
+
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
