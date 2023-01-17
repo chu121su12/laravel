@@ -54,7 +54,6 @@ $rules = [
         'syntax' => $php53 ? 'long' : 'short',
     ],
     'no_multiline_whitespace_around_double_arrow' => true,
-    'no_trailing_comma_in_singleline_array' => true,
     'no_whitespace_before_comma_in_array' => [
         'after_heredoc' => false,
     ],
@@ -82,6 +81,9 @@ $rules = [
     ],
     'encoding' => true,
     'no_multiple_statements_per_line' => true,
+    'no_trailing_comma_in_singleline' => [
+        'elements' => ['arguments', 'array', 'array_destructuring', 'group_import'],
+    ],
     'non_printable_character' => !$regularRisky ? false : [
         'use_escape_sequences_in_strings' => true,
     ],
@@ -275,6 +277,7 @@ $rules = [
     'fopen_flags' => $regularRisky,
     'function_declaration' => [
         'closure_function_spacing' => 'one',
+        'closure_fn_spacing' => 'one',
         'trailing_comma_single_line' => false,
     ],
     'function_typehint_space' => true,
@@ -292,7 +295,6 @@ $rules = [
         'strict' => true,
     ],
     'no_spaces_after_function_name' => true,
-    'no_trailing_comma_in_singleline_function_call' => true,
     'no_unreachable_default_argument_value' => false,
     'no_useless_sprintf' => $regularRisky,
     'nullable_type_declaration_for_default_null_value' => [
@@ -398,6 +400,9 @@ $rules = [
         'named_class' => false,
     ],
     'no_space_around_double_colon' => true,
+    'no_useless_concat_operator' => [
+        'juggle_simple_strings' => true,
+    ],
     'no_useless_nullsafe_operator' => true,
     'not_operator_with_space' => false,
     'not_operator_with_successor_space' => true,
@@ -525,6 +530,11 @@ $rules = [
     'align_multiline_comment' => true,
     'no_blank_lines_after_phpdoc' => true,
     'no_empty_phpdoc' => true,
+    'no_superfluous_phpdoc_tags' => [
+        'allow_mixed' => true,
+        'remove_inheritdoc' => false,
+        'allow_unused_params' => true,
+    ],
     'phpdoc_indent' => true,
     'phpdoc_trim' => true,
 ];

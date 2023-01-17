@@ -48,7 +48,7 @@
             "@php artisan key:generate --ansi"
         ],
         "stan": "@php phpstan.phar analyze --memory-limit 1G",
-        "cs": "@php php-cs-fixer-v3.phar fix --allow-risky yes"
+        "cs": "@php php-cs-fixer.phar fix --allow-risky yes"
     },
     "extra": {
         "laravel": {
