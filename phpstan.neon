@@ -5,7 +5,7 @@ parameters:
         - app
 
     bootstrapFiles:
-        - phpstan-bootstrap.php
+        - .phpstan-bootstrap.php
 
     # polluteScopeWithLoopInitialAssignments: false
     # polluteScopeWithAlwaysIterableForeach: false

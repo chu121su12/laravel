@@ -164,6 +164,9 @@ return [
 
     'providers' => ServiceProvider::defaultProviders()->merge([
         // Package Service Providers...
+        // Laravel\Fortify\FortifyServiceProvider::class,
+        // Laravel\Jetstream\JetstreamServiceProvider::class,
+        // Laravel\Tinker\TinkerServiceProvider::class,
     ])->merge([
         // Application Service Providers...
         App\Providers\AppServiceProvider::class,

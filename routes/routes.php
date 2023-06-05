@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('version', function () {
+Route::get('_version', function () {
     return Illuminate\Foundation\Application::VERSION;
+});
+
+Route::get('_health', function () {
+    return response('', 204);
 });

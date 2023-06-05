@@ -150,12 +150,26 @@ return [
             'level' => env('LOG_LEVEL', 'debug'),
         ],
 
+        'single' => [
+            'driver' => 'single',
+            'tap' => [CR\Library\Laravel\LogHandler\LogFormatter::class],
+            'path' => storage_path('logs/' . php_sapi_name() . '-laravel.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+
         'daily' => [
             'driver' => 'daily',
             'tap' => [CR\Library\Laravel\LogHandler\LogFormatter::class],
             'path' => storage_path('logs/' . php_sapi_name() . '-laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             // 'days' => 14,
+        ],
+
+        'stdout' => [
+            'driver' => 'single',
+            'tap' => [CR\Library\Laravel\LogHandler\LogFormatter::class],
+            'path' => 'php://stdout',
+            'level' => env('LOG_LEVEL', 'debug'),
         ],
     ],
 

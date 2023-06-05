@@ -35,8 +35,8 @@ class AppServiceProvider extends ServiceProvider
         if (($appUrl = config('app.url')) && $appUrl !== 'http://localhost') {
             URL::forceRootUrl($appUrl);
 
-            foreach (['https', 'http'] as $prefix) {
-                if (\str_starts_with($appUrl, $prefix . ':')) {
+            foreach (['https:', 'http:'] as $prefix) {
+                if (\str_starts_with($appUrl, $prefix)) {
                     URL::forceScheme($prefix);
                 }
             }

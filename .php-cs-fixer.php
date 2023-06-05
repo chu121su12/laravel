@@ -1,57 +1,87 @@
 <?php
 
-$php53 = false;
-$sortRisky = false;
-$yoda = false;
+$param['risky'] = false;
 
-// app
-$finalClass = false;
-$ifToBoolReturn = true;
-$keepUnusedImport = true;
-$moreRisky = true;
-$regularRisky = true;
-$sortOther = true;
-$superRisky = true;
+$next = '';
 
-// // lib
-// $finalClass = false;
-// $ifToBoolReturn = true;
-// $keepUnusedImport = false;
-// $moreRisky = true;
-// $regularRisky = true;
-// $sortOther = true;
-// $superRisky = false;
+foreach ($_SERVER['argv'] as $k => $argValue) {
+    if (! $next) {
+        if ($argValue === '--allow-risky') {
+            $next = 'risky';
+            break;
+        }
+    }
+    else {
+        $param[$next] = \strtolower($argValue) === 'yes';
+        $next = '';
+    }
+}
+
+$param['php53'] = false;
+$param['app'] = true;
+$param['sortRisky'] = false;
+$param['yoda'] = false;
+$param['folders'] = [
+    'app',
+    'config',
+    'database',
+    'public',
+    'resources/views',
+    'routes',
+    'tests',
+];
+
+if ($param['app']) {
+    // app
+    $param['finalClass'] = false;
+    $param['ifToBoolReturn'] = true;
+    $param['keepUnusedImport'] = true;
+    $param['moreRisky'] = $param['risky'];
+    $param['regularRisky'] = $param['risky'];
+    $param['sortOther'] = true;
+    $param['superRisky'] = $param['risky'];
+}
+else {
+    // lib
+    $param['finalClass'] = false;
+    $param['ifToBoolReturn'] = true;
+    $param['keepUnusedImport'] = false;
+    $param['moreRisky'] = $param['risky'];
+    $param['regularRisky'] = $param['risky'];
+    $param['sortOther'] = true;
+    $param['superRisky'] = false;
+}
 
 //
-$rules = [
+$param['rules'] = [
     ///
 
-    'array_push' => $regularRisky,
+    'array_push' => $param['regularRisky'],
     'backtick_to_shell_exec' => true,
-    'ereg_to_preg' => $regularRisky,
-    'mb_str_functions' => $superRisky,
-    'modernize_strpos' => $regularRisky,
-    'no_alias_functions' => !$regularRisky ? false : [
+    'ereg_to_preg' => $param['regularRisky'],
+    'mb_str_functions' => $param['superRisky'],
+    'modernize_strpos' => $param['regularRisky'],
+    'no_alias_functions' => !$param['regularRisky'] ? false : [
         'sets' => ['@all'],
     ],
     'no_alias_language_construct_call' => true,
     'no_mixed_echo_print' => [
         'use' => 'echo',
     ],
-    'pow_to_exponentiation' => $regularRisky,
-    'random_api_migration' => !$regularRisky ? false : [
+    'pow_to_exponentiation' => $param['regularRisky'],
+    'random_api_migration' => !$param['regularRisky'] ? false : [
         'replacements' => [
             'getrandmax' => 'mt_getrandmax',
             'rand' => 'mt_rand',
             'srand' => 'mt_srand',
         ],
     ],
-    'set_type_to_cast' => $regularRisky,
+    'set_type_to_cast' => $param['regularRisky'],
 
     ///
 
     'array_syntax' => [
-        'syntax' => $php53 ? 'long' : 'short',
+        'syntax' => $param['php53'] ? 'long' : 'short',
     ],
     'no_multiline_whitespace_around_double_arrow' => true,
     'no_whitespace_before_comma_in_array' => [
@@ -63,13 +93,6 @@ $rules = [
 
     ///
 
-    'braces' => [
-        'allow_single_line_anonymous_class_with_empty_body' => true,
-        'allow_single_line_closure' => true,
-        'position_after_anonymous_constructs' => 'same',
-        'position_after_control_structures' => 'same',
-        'position_after_functions_and_oop_constructs' => 'next',
-    ],
     'curly_braces_position' => [
         'allow_single_line_anonymous_functions' => true,
         'allow_single_line_empty_anonymous_classes' => true,
@@ -84,11 +107,12 @@ $rules = [
     'no_trailing_comma_in_singleline' => [
         'elements' => ['arguments', 'array', 'array_destructuring', 'group_import'],
     ],
-    'non_printable_character' => !$regularRisky ? false : [
+    'non_printable_character' => !$param['regularRisky'] ? false : [
         'use_escape_sequences_in_strings' => true,
     ],
     'octal_notation' => true,
     // 'psr_autoloading' => '',
+    'single_line_empty_body' => true,
 
     ///
 
@@ -110,7 +134,7 @@ $rules = [
         'space' => 'single',
     ],
     'lowercase_cast' => true,
-    'modernize_types_casting' => $regularRisky,
+    'modernize_types_casting' => $param['regularRisky'],
     'no_short_bool_cast' => true,
     'no_unset_cast' => true,
     'short_scalar_cast' => true,
@@ -133,14 +157,14 @@ $rules = [
         'single_line' => true,
         'space_before_parenthesis' => false,
     ],
-    'final_class' => $finalClass,
-    'final_internal_class' => $finalClass,
-    'final_public_method_for_abstract_class' => $finalClass,
+    'final_class' => $param['finalClass'],
+    'final_internal_class' => $param['finalClass'],
+    'final_public_method_for_abstract_class' => $param['finalClass'],
     'no_blank_lines_after_class_opening' => true,
     'no_null_property_initialization' => true,
-    'no_php4_constructor' => $regularRisky,
-    'no_unneeded_final_method' => $regularRisky,
-    'ordered_class_elements' => !$sortRisky ? false : [
+    'no_php4_constructor' => $param['regularRisky'],
+    'no_unneeded_final_method' => $param['regularRisky'],
+    'ordered_class_elements' => !$param['sortRisky'] ? false : [
         'order' => [
             'use_trait',
             'case',
@@ -160,10 +184,14 @@ $rules = [
         ],
         'sort_algorithm' => 'alpha',
     ],
-    'ordered_interfaces' => $sortOther,
-    'ordered_traits' => $sortOther,
-    'protected_to_private' => true, // $finalClass,
-    'self_accessor' => $regularRisky,
+    'ordered_interfaces' => $param['sortOther'],
+    'ordered_traits' => $param['moreRisky'] ? $param['sortOther'] : false,
+    'ordered_types' => [
+        'sort_algorithm' => 'alpha',
+        'null_adjustment' => 'always_first',
+    ],
+    'protected_to_private' => true, // $param['finalClass'],
+    'self_accessor' => $param['regularRisky'],
     'self_static_accessor' => true,
     'single_class_element_per_statement' => [
         'elements' => [
@@ -182,7 +210,7 @@ $rules = [
 
     ///
 
-    'date_time_immutable' => $regularRisky,
+    'date_time_immutable' => $param['regularRisky'],
 
     ///
 
@@ -201,7 +229,7 @@ $rules = [
 
     ///
 
-    'native_constant_invocation' => !$regularRisky ? false : [
+    'native_constant_invocation' => !$param['regularRisky'] ? false : [
         'exclude' => ['null', 'false', 'true'],
         'fix_built_in' => true,
         'include' => [],
@@ -237,7 +265,7 @@ $rules = [
             'clone',
             'continue',
             'echo_print',
-            $superRisky ? 'negative_instanceof' : false,
+            $param['superRisky'] ? 'negative_instanceof' : false,
             'others',
             'return',
             'switch_case',
@@ -249,11 +277,11 @@ $rules = [
         'namespaces' => false,
     ],
     'no_useless_else' => true,
-    'simplified_if_return' => $ifToBoolReturn,
+    'simplified_if_return' => $param['ifToBoolReturn'],
     'switch_case_semicolon_to_colon' => true,
     'switch_case_space' => true,
     'switch_continue_to_break' => true,
-    'trailing_comma_in_multiline' => $php53 ? false : [
+    'trailing_comma_in_multiline' => $param['php53'] ? false : [
         'after_heredoc' => false,
         'elements' => [
             // 'arguments',
@@ -262,7 +290,7 @@ $rules = [
             // 'parameters',
         ],
     ],
-    'yoda_style' => !$yoda ? false : [
+    'yoda_style' => !$param['yoda'] ? false : [
         'always_move_variable' => true,
         'equal' => true,
         'identical' => true,
@@ -271,24 +299,24 @@ $rules = [
 
     ///
 
-    'combine_nested_dirname' => $regularRisky,
-    'date_time_create_from_format_call' => true,
-    'fopen_flag_order' => $regularRisky,
-    'fopen_flags' => $regularRisky,
+    'combine_nested_dirname' => $param['regularRisky'],
+    'date_time_create_from_format_call' => $param['regularRisky'],
+    'fopen_flag_order' => $param['regularRisky'],
+    'fopen_flags' => $param['regularRisky'],
     'function_declaration' => [
         'closure_function_spacing' => 'one',
         'closure_fn_spacing' => 'one',
         'trailing_comma_single_line' => false,
     ],
     'function_typehint_space' => true,
-    'implode_call' => $regularRisky,
+    'implode_call' => $param['regularRisky'],
     'lambda_not_used_import' => true,
     'method_argument_space' => [
         'after_heredoc' => false,
         'keep_multiple_spaces_after_comma' => false,
         'on_multiline' => 'ensure_fully_multiline',
     ],
-    'native_function_invocation' => !$regularRisky ? false : [
+    'native_function_invocation' => !$param['regularRisky'] ? false : [
         'exclude' => [],
         'include' => ['@internal'],
         'scope' => 'all',
@@ -296,16 +324,16 @@ $rules = [
     ],
     'no_spaces_after_function_name' => true,
     'no_unreachable_default_argument_value' => false,
-    'no_useless_sprintf' => $regularRisky,
+    'no_useless_sprintf' => $param['regularRisky'],
     'nullable_type_declaration_for_default_null_value' => [
         'use_nullable_type_declaration' => false,
     ],
-    'regular_callable_call' => !$php53 && $moreRisky,
+    'regular_callable_call' => !$param['php53'] && $param['moreRisky'],
     'return_type_declaration' => [
         'space_before' => 'one',
     ],
     'single_line_throw' => true,
-    'static_lambda' => !$php53 && $regularRisky,
+    'static_lambda' => !$param['php53'] && $param['regularRisky'],
     'use_arrow_functions' => false,
     'void_return' => false,
 
@@ -320,7 +348,7 @@ $rules = [
     'group_import' => false,
     'no_leading_import_slash' => true,
     'no_unneeded_import_alias' => true,
-    'no_unused_imports' => !$keepUnusedImport,
+    'no_unused_imports' => !$param['keepUnusedImport'],
     'ordered_imports' => [
         'sort_algorithm' => 'alpha',
         'imports_order' => [
@@ -342,10 +370,10 @@ $rules = [
         'space' => 'single',
     ],
     'declare_parentheses' => true,
-    'dir_constant' => $regularRisky,
+    'dir_constant' => $param['regularRisky'],
     // 'error_suppression' => [],
-    'explicit_indirect_variable' => $regularRisky,
-    'function_to_constant' => !$regularRisky ? false : [
+    'explicit_indirect_variable' => $param['regularRisky'],
+    'function_to_constant' => !$param['regularRisky'] ? false : [
         'functions' => [
             'get_called_class',
             'get_class',
@@ -356,12 +384,12 @@ $rules = [
         ],
     ],
     'get_class_to_class_keyword' => false,
-    'is_null' => $regularRisky,
-    'no_unset_on_property' => $regularRisky,
-    'single_space_after_construct' => [
-        'constructs' => [
-            'abstract', 'as', 'attribute', 'break', 'case', 'catch', 'class', 'clone', 'comment', 'const', 'const_import', 'continue', 'do', 'echo', 'else', 'elseif', 'enum', 'extends', 'final', 'finally', 'for', 'foreach', 'function', 'function_import', 'global', 'goto', 'if', 'implements', 'include', 'include_once', 'instanceof', 'insteadof', 'interface', 'match', 'named_argument', 'namespace', 'new', 'open_tag_with_echo', 'php_doc', 'php_open', 'print', 'private', 'protected', 'public', 'readonly', 'require', 'require_once', 'return', 'static', 'switch', 'throw', 'trait', 'try', 'use', 'use_lambda', 'use_trait', 'var', 'while', 'yield', 'yield_from'
-        ],
+    'is_null' => $param['regularRisky'],
+    'no_unset_on_property' => $param['regularRisky'],
+    'single_space_around_construct' => [
+        'constructs_contain_a_single_space' => ['yield_from'],
+        'constructs_preceded_by_a_single_space' => ['use_lambda'],
+        'constructs_followed_by_a_single_space' => ['abstract', 'as', 'attribute', 'break', 'case', 'catch', 'class', 'clone', 'comment', 'const', 'const_import', 'continue', 'do', 'echo', 'else', 'elseif', 'enum', 'extends', 'final', 'finally', 'for', 'foreach', 'function', 'function_import', 'global', 'goto', 'if', 'implements', 'include', 'include_once', 'instanceof', 'insteadof', 'interface', 'match', 'named_argument', 'namespace', 'new', 'open_tag_with_echo', 'php_doc', 'php_open', 'print', 'private', 'protected', 'public', 'readonly', 'require', 'require_once', 'return', 'static', 'switch', 'throw', 'trait', 'try', 'type_colon', 'use', 'use_lambda', 'use_trait', 'var', 'while', 'yield', 'yield_from'],
     ],
 
     ///
@@ -380,7 +408,7 @@ $rules = [
 
     ///
 
-    'no_homoglyph_names' => $regularRisky,
+    'no_homoglyph_names' => $param['regularRisky'],
 
     ///
 
@@ -394,7 +422,7 @@ $rules = [
     'increment_style' => [
         'style' => 'pre',
     ],
-    'logical_operators' => $regularRisky,
+    'logical_operators' => $param['regularRisky'],
     'new_with_braces' => [
         'anonymous_class' => true,
         'named_class' => false,
@@ -414,7 +442,7 @@ $rules = [
     'standardize_increment' => true,
     'standardize_not_equals' => true,
     'ternary_operator_spaces' => true,
-    'ternary_to_elvis_operator' => $regularRisky,
+    'ternary_to_elvis_operator' => $param['regularRisky'],
     'ternary_to_null_coalescing' => false,
     'unary_operator_spaces' => true,
 
@@ -450,8 +478,8 @@ $rules = [
     ///
 
     'declare_strict_types' => false,
-    'strict_comparison' => $moreRisky,
-    'strict_param' => $regularRisky,
+    'strict_comparison' => $param['moreRisky'],
+    'strict_param' => $param['regularRisky'],
 
     ///
 
@@ -463,13 +491,13 @@ $rules = [
     'explicit_string_variable' => true,
     'heredoc_to_nowdoc' => true,
     'no_binary_string' => true,
-    'no_trailing_whitespace_in_string' => $moreRisky,
+    'no_trailing_whitespace_in_string' => $param['moreRisky'],
     'simple_to_complex_string_variable' => true,
     'single_quote' => [
         'strings_containing_single_quote_chars' => false,
     ],
-    'string_length_to_empty' => $regularRisky,
-    'string_line_ending' => $moreRisky,
+    'string_length_to_empty' => $param['regularRisky'],
+    'string_line_ending' => $param['moreRisky'],
 
     ///
 
@@ -536,9 +564,16 @@ $rules = [
         'allow_unused_params' => true,
     ],
     'phpdoc_indent' => true,
+    'phpdoc_param_order' => true,
     'phpdoc_trim' => true,
 ];
 
 return (new PhpCsFixer\Config)
-    ->setRules($rules)
-    ->setFinder(PhpCsFixer\Finder::create()->in(__DIR__.'/app/'));
+    ->setRules($param['rules'])
+    ->setFinder(\call_user_func(static function () use ($params) {
+        $folders = [];
+        foreach ($params['folders'] as $folder) {
+            $folders[] = __DIR__.'/'.$folder.'/';
+        }
+        return PhpCsFixer\Finder::create()->in($folders);
+    }));
