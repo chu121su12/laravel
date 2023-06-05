@@ -18,8 +18,11 @@ use Illuminate\Foundation\Configuration\Middleware;
 return Application::configure()
     ->withBroadcasting()
     ->withRouting(
-        web: __DIR__.'/../routes/web.php',
-        api: __DIR__.'/../routes/api.php',
+        /*callback: */null,
+        /*web: */__DIR__.'/../routes/web.php',
+        /*api: */__DIR__.'/../routes/api.php',
+        /*apiPrefix: */'api',
+        /*then: */null
     )
     ->withMiddleware(function (Middleware $middleware) {
         //
