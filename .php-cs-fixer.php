@@ -570,9 +570,9 @@ $param['rules'] = [
 
 return (new PhpCsFixer\Config)
     ->setRules($param['rules'])
-    ->setFinder(\call_user_func(static function () use ($params) {
+    ->setFinder(\call_user_func(static function () use ($param) {
         $folders = [];
-        foreach ($params['folders'] as $folder) {
+        foreach ($param['folders'] as $folder) {
             $folders[] = __DIR__.'/'.$folder.'/';
         }
         return PhpCsFixer\Finder::create()->in($folders);
