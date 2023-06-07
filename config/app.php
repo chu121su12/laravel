@@ -96,9 +96,9 @@ return [
     | Application Fallback Locale
     |--------------------------------------------------------------------------
     |
-    | The fallback locale determines the locale to use when the current one
+    | The fallback locale determines the locale to use when the default one
     | is not available. You may change the value to correspond to any of
-    | the language folders that are provided through your application.
+    | the languages which are currently supported by your application.
     |
     */
 
@@ -123,8 +123,8 @@ return [
     |--------------------------------------------------------------------------
     |
     | This key is utilized by Laravel's encryption services and should be set
-    | to a random, 32 character string; otherwise, these encrypted strings
-    | will not be safe. Please do this before deploying the application.
+    | to a random, 32 character string or all of the encrypted strings are
+    | not secure. You should do this prior to deploying the application.
     |
     */
 
@@ -164,15 +164,17 @@ return [
 
     'providers' => ServiceProvider::defaultProviders()->merge([
         // Package Service Providers...
+
         // Laravel\Fortify\FortifyServiceProvider::class,
         // Laravel\Jetstream\JetstreamServiceProvider::class,
         // Laravel\Tinker\TinkerServiceProvider::class,
     ])->merge([
         // Application Service Providers...
         App\Providers\AppServiceProvider::class,
+
         // App\Providers\TelescopeServiceProvider::class,
-        App\Providers\FortifyServiceProvider::class,
-        App\Providers\JetstreamServiceProvider::class,
+        // App\Providers\FortifyServiceProvider::class,
+        // App\Providers\JetstreamServiceProvider::class,
     ])->merge([
         // Added Service Providers (Do not remove this line)...
     ])->toArray(),
@@ -183,8 +185,8 @@ return [
     |--------------------------------------------------------------------------
     |
     | This array of class aliases will be registered when this application
-    | is started. However, feel free to register as many as you wish as
-    | the aliases are "lazy" loaded so they don't hinder performance.
+    | is started. You may add any additional class aliases which should
+    | be loaded to the array. For speed, all aliases are lazy loaded.
     |
     */
 
