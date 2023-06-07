@@ -21,11 +21,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 return Application::configure()
-    ->withRouting(
-        web: __DIR__.'/../routes/web.php',
-        api: __DIR__.'/../routes/api.php',
-        commands: __DIR__.'/../routes/console.php',
-        channels: __DIR__.'/../routes/channels.php',
+    ->withRouting(function () {
+        //
+
+        RateLimiter::for_('api', function (Request $request) {
+            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+        });
+
+        Route::middleware('api')->prefix('api')->group(__DIR__.'/../routes/api.php');
+        Route::middleware('web')->group(__DIR__.'/../routes/web.php');
+        Route::group([], __DIR__.'/../routes/routes.php');
+    })
+    ->withCommands([
+        __DIR__.'/../routes/console.php',
+    ])
+    ->withBroadcasting( // channels
+        __DIR__.'/../routes/channels.php'
     )
     ->withMiddleware(function (Middleware $middleware) {
         //
@@ -33,11 +44,9 @@ return Application::configure()
     ->withExceptions(function (Exceptions $exceptions) {
         //
 
-        //
-
-        $property = (new \ReflectionClass($handler))->getProperty('internalDontReport');
+        $property = (new \ReflectionClass($exceptions->handler))->getProperty('internalDontReport');
         $property->setAccessible(true);
-        $property->setValue($handler, []);
+        $property->setValue($exceptions->handler, []);
 
         return $property;
     })->create();

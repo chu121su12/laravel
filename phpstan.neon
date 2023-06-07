@@ -9,7 +9,7 @@ parameters:
 
     # polluteScopeWithLoopInitialAssignments: false
     # polluteScopeWithAlwaysIterableForeach: false
-    # checkFunctionNameCase: true
-    # checkInternalClassCaseSensitivity: true
+    checkFunctionNameCase: true
+    checkInternalClassCaseSensitivity: true
     # checkUninitializedProperties: true
     # checkDynamicProperties: true
