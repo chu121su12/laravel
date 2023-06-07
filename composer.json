@@ -6,7 +6,7 @@
     "license": "MIT",
     "repositories": [
         { "type": "git", "url": "https://gitlab.com/chu121su12/cr-library.git" },
-        { "type": "git", "url": "https://github.com/chu121su12/framework.git" }
+        { "type": "git", "url": "https://gitlab.com/chu121su12/laravel-prev.git" }
     ],
     "require": {
         "php": ">=5.6",
