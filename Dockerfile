@@ -87,4 +87,4 @@ RUN echo cleanup &&\
 
 EXPOSE 80
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-CMD /etc/init.d/php8.2-fpm start && /usr/sbin/nginx && tail -Fqn0 /var/www/source/storage/logs/fpm-fcgi-laravel.log
+CMD echo '[[]] [] mark'$'\n''[['`date +%s.%N`']] ['`date`'] starting w/: '`php8.2 -v` >> /var/www/source/storage/logs/fpm-fcgi-laravel.log && /etc/init.d/php8.2-fpm start && /usr/sbin/nginx && tail -Fqn1 /var/www/source/storage/logs/fpm-fcgi-laravel.log
