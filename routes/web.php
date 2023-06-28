@@ -10,8 +10,8 @@ use Inertia\Inertia;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| routes are loaded within the "web" middleware group which includes
+| sessions, cookie encryption, and more. Go build something great!
 |
 */
 

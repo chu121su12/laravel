@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 return Application::configure()
+    ->withProviders()
     ->withRouting(function () {
         //
 
