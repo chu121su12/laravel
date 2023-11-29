@@ -25,20 +25,20 @@ return Application::configure()
     ->withRouting(function () {
         //
 
-        RateLimiter::for_('api', function (Request $request) {
-            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
-        });
+        // RateLimiter::for_('api', function (Request $request) {
+        //     return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+        // });
 
-        Route::middleware('api')->prefix('api')->group(__DIR__.'/../routes/api.php');
+        // Route::middleware('api')->prefix('api')->group(__DIR__.'/../routes/api.php');
         Route::middleware('web')->group(__DIR__.'/../routes/web.php');
         Route::group([], __DIR__.'/../routes/routes.php');
     })
     ->withCommands([
         __DIR__.'/../routes/console.php',
     ])
-    ->withBroadcasting( // channels
-        __DIR__.'/../routes/channels.php'
-    )
+    // ->withBroadcasting(
+    //     __DIR__.'/../routes/channels.php'
+    // )
     ->withMiddleware(function (Middleware $middleware) {
         //
     })
